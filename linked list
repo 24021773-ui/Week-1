@@ -11,7 +11,7 @@ Node* makeNode(int x) {
     return newNode;
 }
 / Truy cập phần tử tại vị trí k o(n)
-void getAt(Node* head, int k) {
+void TruyCapViTriK(Node* head, int k) {
     Node* p = head;
     int index = 0;
     while (p != NULL && index < k) {
@@ -25,13 +25,13 @@ void getAt(Node* head, int k) {
     }
 }
 / Chèn đầu o(1)
-void insertFirst(Node* &head, int x) {
+void ChenDau(Node* &head, int x) {
     Node* newNode = makeNode(x);
     newNode->next = head;
     head = newNode;
 }
 / Chèn cuối o(n)
-void insertLast(Node* &head, int x) {
+void ChenCuoi(Node* &head, int x) {
     Node* newNode = makeNode(x);
     if (head == NULL) {
         head = newNode;
@@ -44,7 +44,7 @@ void insertLast(Node* &head, int x) {
     p->next = newNode;
 }
 / Chèn vào vị trí k o(n)
-void insertK(Node* &head, int x, int k) {
+void ChenViTriK(Node* &head, int x, int k) {
     if (k == 0) {
         insertFirst(head, x);
         return;
@@ -59,14 +59,14 @@ void insertK(Node* &head, int x, int k) {
     p->next = newNode;
 }
 / Xóa đầu o(1)
-void deleteFirst(Node* &head) {
+void XoaDau(Node* &head) {
     if (head == NULL) return;
     Node* temp = head;
     head = head->next;
     delete temp;
 }
 / Xóa cuối o(n)
-void deleteLast(Node* &head) {
+void XoaCuoi(Node* &head) {
     if (head == NULL) return;
     if (head->next == NULL) {
         delete head;
@@ -81,7 +81,7 @@ void deleteLast(Node* &head) {
     p->next = NULL;
 }
 / Xóa vị trí k o(n)
-void deletePosition(Node* &head, int k) {
+void XoaViTriK(Node* &head, int k) {
     if (head == NULL) return;
     if (k == 0) {
         deleteFirst(head);
@@ -97,7 +97,7 @@ void deletePosition(Node* &head, int k) {
     delete temp;
 }
 / Duyệt xuôi o(n)
-void printForward(Node* head) {
+void DuyetXuoi(Node* head) {
     Node* p = head;
     while (p != NULL) {
         cout << p->data << " ";
@@ -106,7 +106,7 @@ void printForward(Node* head) {
     cout << endl;
 }
 / Duyệt ngược o(n)
-void printReverse(Node* head) {
+void DuyetNguoc(Node* head) {
     int temp[100];
     int count = 0;
     Node* p = head;
