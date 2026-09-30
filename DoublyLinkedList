@@ -1,0 +1,138 @@
+#include 
+using namespace std;
+struct Node {
+    int data;
+    Node* next;
+    Node* prev;
+};
+Node* NewNode(int x) {
+    Node* newNode = new Node();
+    newNode->data = x;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+    return newNode;
+}
+/ Truy cập phần tử tại vị trí k o(n)
+void TruycapViTriK(Node* head, int k) {
+    Node* p = head;
+    int index = 0;
+    while (p != NULL && index < k) {
+        p = p->next;
+        index++;
+    }
+    if (p == NULL) {
+        cout << "Vi tri khong hop le!" << endl;
+    } else {
+        cout << "Phan tu tai vi tri " << k << " la: " << p->data << endl;
+    }
+}
+/ Chèn đầu o(1)
+void ChenDau(Node* &head, Node* &tail, int x) {
+    Node* newNode = makeNode(x);
+    if (head == NULL) {
+        head = tail = newNode;
+        return;
+    }
+    newNode->next = head;
+    head->prev = newNode;
+    head = newNode;
+}
+
+/ Chèn cuối o(1)
+void ChenCuoi(Node* &head, Node* &tail, int x) {
+    Node* newNode = makeNode(x);
+    if (head == NULL) {
+        head = tail = newNode;
+        return;
+    }
+    tail->next = newNode;
+    newNode->prev = tail;
+    tail = newNode;
+}
+/ Chèn vào vị trí k o(n)
+void ChenViTriK(Node* &head, Node* &tail, int x, int k) {
+    if (k == 0) {
+        insertFirst(head, tail, x);
+        return;
+    }
+    Node* p = head;
+    for (int i = 0; i < k - 1 && p != NULL; i++) {
+        p = p->next;
+    }
+    if (p == NULL) return;
+    if (p == tail) {
+        insertLast(head, tail, x);
+        return;
+    }
+    Node* newNode = makeNode(x);
+    newNode->next = p->next;
+    newNode->prev = p;
+    p->next->prev = newNode;
+    p->next = newNode;
+}
+/ Xóa đầu o(1)
+void XoaDau(Node* &head, Node* &tail) {
+    if (head == NULL) return;
+    Node* temp = head;
+    if (head == tail) {
+        head = tail = NULL;
+    } else {
+        head = head->next;
+        head->prev = NULL;
+    }
+    delete temp;
+}
+
+/ Xóa cuối o(1)
+void XoaCuoi(Node* &head, Node* &tail) {
+    if (tail == NULL) return;
+    Node* temp = tail;
+    if (head == tail) {
+        head = tail = NULL;
+    } else {
+        tail = tail->prev;
+        tail->next = NULL;
+    }
+    delete temp;
+}
+
+/ Xóa vị trí k o(n)
+void XoaViTriK(Node* &head, Node* &tail, int k) {
+    if (head == NULL) return;
+    if (k == 0) {
+        deleteFirst(head, tail);
+        return;
+    }
+    Node* p = head;
+    for (int i = 0; i < k && p != NULL; i++) {
+        p = p->next;
+    }
+    if (p == NULL) return;
+    if (p == tail) {
+        deleteLast(head, tail);
+        return;
+    }
+    p->prev->next = p->next;
+    p->next->prev = p->prev;
+    delete p;
+}
+
+/ Duyệt xuôi o(n)
+void DuyetXuoi(Node* head) {
+    Node* p = head;
+    while (p != NULL) {
+        cout << p->data << " ";
+        p = p->next;
+    }
+    cout << endl;
+}
+
+/ Duyệt ngược o(1)
+void DuyetNguoc(Node* tail) {
+    Node* p = tail;
+    while (p != NULL) {
+        cout << p->data << " ";
+        p = p->prev;
+    }
+    cout << endl;
+}
