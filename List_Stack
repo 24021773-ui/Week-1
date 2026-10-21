@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+int arr[100];
+int n = 0;i
+//   O(1)
+bool isEmpty() {
+    return n == 0;
+}
+//  O(1)
+void push(int x) {
+    arr[n] = x;
+    n++;
+}
+// O(1)
+void pop() {
+    if (isEmpty()) return;
+    n--;
+}
+// O(1)
+int top() {
+    if (isEmpty()) return -1;
+    return arr[n - 1];
+}
+// O(1)
+int size() {
+    return n;
+}
